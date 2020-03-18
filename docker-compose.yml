@@ -1,0 +1,29 @@
+version: '3.6'
+
+services:
+  mongodb:
+    container_name: mongodb
+    build:
+      context: .
+      dockerfile: dockerfiles/MongoDB.Dockerfile
+    environment:
+      - MONGO_INITDB_DATABASE=databasename
+      - MONGO_INITDB_ROOT_USERNAME=exampledb
+      - MONGO_INITDB_ROOT_PASSWORD=jHd63mvVuAw94kd8J2Kl29s
+    volumes:
+      - ./extra_data:/opt
+      - mongodbdata:/data/db
+    ports:
+      - '27017-27019:27017-27019'
+    networks:
+      - mongodb_net
+
+      # Docker Volumes
+volumes:
+  mongodbdata:
+
+
+# Docker Networks
+networks:
+  mongodb_net:
+    external: true
